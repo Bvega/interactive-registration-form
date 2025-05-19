@@ -1,0 +1,19 @@
+# Dependency directories
+node_modules/
+
+# macOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# VS Code settings
+.vscode/
+
+# Log files
+*.log
+
+# Optional: environment or local config
+.env
