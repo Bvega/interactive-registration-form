@@ -1,19 +1,17 @@
-// script.js
-
-// Select form and input elements
+// Get all the form elements
 const form = document.getElementById('registrationForm');
 const username = document.getElementById('username');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const confirmPassword = document.getElementById('confirmPassword');
 
-// Select error message spans
+// Get error message span elements
 const usernameError = document.getElementById('usernameError');
 const emailError = document.getElementById('emailError');
 const passwordError = document.getElementById('passwordError');
 const confirmPasswordError = document.getElementById('confirmPasswordError');
 
-// Load saved username from localStorage
+// Load saved username from localStorage on page load
 window.addEventListener('DOMContentLoaded', () => {
   const savedUsername = localStorage.getItem('username');
   if (savedUsername) {
@@ -21,7 +19,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Validate input on real-time (input event)
+// Validate username in real-time
 username.addEventListener('input', () => {
   if (username.validity.valueMissing) {
     usernameError.textContent = 'Username is required.';
@@ -32,6 +30,7 @@ username.addEventListener('input', () => {
   }
 });
 
+// Validate email in real-time
 email.addEventListener('input', () => {
   if (email.validity.valueMissing) {
     emailError.textContent = 'Email is required.';
@@ -42,6 +41,7 @@ email.addEventListener('input', () => {
   }
 });
 
+// Validate password in real-time
 password.addEventListener('input', () => {
   const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
   if (password.validity.valueMissing) {
@@ -53,6 +53,7 @@ password.addEventListener('input', () => {
   }
 });
 
+// Check if confirm password matches
 confirmPassword.addEventListener('input', () => {
   if (confirmPassword.value !== password.value) {
     confirmPasswordError.textContent = 'Passwords do not match.';
@@ -61,25 +62,27 @@ confirmPassword.addEventListener('input', () => {
   }
 });
 
-// Final validation on submit
+// Handle form submission
 form.addEventListener('submit', (e) => {
-  e.preventDefault(); // prevent default submission
+  e.preventDefault(); // Prevent page reload
 
-  let isValid = true;
+  let isValid = true; // Flag for validation state
 
-  // Trigger all validations
+  // Username check
   if (username.value.trim().length < 3) {
     usernameError.textContent = 'Username must be at least 3 characters.';
     username.focus();
     isValid = false;
   }
 
+  // Email check using built-in validity
   if (!email.checkValidity()) {
     emailError.textContent = 'Please enter a valid email address.';
     email.focus();
     isValid = false;
   }
 
+  // Password regex check
   const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
   if (!passwordPattern.test(password.value)) {
     passwordError.textContent = 'Must include 8+ chars, uppercase, lowercase, and a number.';
@@ -87,15 +90,22 @@ form.addEventListener('submit', (e) => {
     isValid = false;
   }
 
+  // Confirm password check
   if (confirmPassword.value !== password.value) {
     confirmPasswordError.textContent = 'Passwords do not match.';
     confirmPassword.focus();
     isValid = false;
   }
 
+  // If all checks pass
   if (isValid) {
     alert('Registration successful!');
-    localStorage.setItem('username', username.value);
-    form.reset();
+    try {
+      // Save username locally
+      localStorage.setItem('username', username.value);
+    } catch (e) {
+      console.warn('Could not save to localStorage:', e);
+    }
+    form.reset(); // Clear form inputs
   }
 });

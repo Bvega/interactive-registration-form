@@ -1,47 +1,72 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <!-- Character encoding for supporting most languages -->
+  <meta charset="UTF-8" />
+  <!-- Ensures proper scaling on different screen sizes -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Link to external CSS file -->
+  <link rel="stylesheet" href="styles.css" />
   <title>Interactive Registration Form</title>
 </head>
 <body>
+  <!-- Main container for centering and styling -->
   <div class="container">
     <h1>Register</h1>
+
+    <!-- Registration form starts here -->
     <form id="registrationForm" novalidate>
-      <!-- Form Groups for each field -->
+      <!-- "novalidate" disables default browser messages so we can use custom ones -->
+
+      <!-- Username Field -->
       <div class="form-group">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required minlength="3">
+        <!-- "required" = must fill in; "minlength" = at least 3 characters -->
+        <input type="text" id="username" name="username" required minlength="3" />
+        <!-- Custom error message will appear in this span -->
         <span class="error-message" id="usernameError"></span>
       </div>
 
+      <!-- Email Field -->
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <!-- type="email" checks for correct email structure -->
+        <input type="email" id="email" name="email" required />
         <span class="error-message" id="emailError"></span>
       </div>
 
+      <!-- Password Field -->
       <div class="form-group">
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password"
-               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
-               required>
-        <small>Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, and a number.</small>
+        <!-- "pattern" validates for at least 1 uppercase, 1 lowercase, 1 digit, and 8+ characters -->
+        <input
+          type="password"
+          id="password"
+          name="password"
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
+          required
+        />
+        <!-- Hint for users about the password format -->
+        <small>
+          Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, and a number.
+        </small>
         <span class="error-message" id="passwordError"></span>
       </div>
 
+      <!-- Confirm Password Field -->
       <div class="form-group">
         <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" required>
+        <!-- This field will be checked manually in JavaScript -->
+        <input type="password" id="confirmPassword" name="confirmPassword" required />
         <span class="error-message" id="confirmPasswordError"></span>
       </div>
 
+      <!-- Submit Button -->
       <button type="submit">Register</button>
     </form>
   </div>
+
+  <!-- Link to external JavaScript file -->
   <script src="script.js"></script>
 </body>
 </html>
