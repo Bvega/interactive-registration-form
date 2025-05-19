@@ -399,3 +399,18 @@ form.addEventListener('submit', (e) => {
   }
 });
 
+## 🔗 Element Relationship Table: HTML ↔ JavaScript
+
+| **HTML Element** | **Selector in JavaScript** | **Element Type** | **Purpose** | **JavaScript Logic Applied** |
+|------------------|----------------------------|------------------|-------------|------------------------------|
+| `<form id="registrationForm">` | `document.getElementById('registrationForm')` | Form container | Wraps the entire form | Used to listen for `submit` and prevent default behavior |
+| `<input id="username">` | `document.getElementById('username')` | Text input | Collect username | Validated for length and saved to localStorage |
+| `<span id="usernameError">` | `document.getElementById('usernameError')` | Span | Display error | Shows if username is empty or too short |
+| `<input id="email">` | `document.getElementById('email')` | Email input | Collect email | Checked for format using Constraint Validation API |
+| `<span id="emailError">` | `document.getElementById('emailError')` | Span | Display error | Shows if email is empty or invalid format |
+| `<input id="password">` | `document.getElementById('password')` | Password input | Collect password | Checked using RegEx for strength and format |
+| `<span id="passwordError">` | `document.getElementById('passwordError')` | Span | Display error | Shows if password does not meet criteria |
+| `<input id="confirmPassword">` | `document.getElementById('confirmPassword')` | Password input | Confirm password | Compared with `password` to ensure they match |
+| `<span id="confirmPasswordError">` | `document.getElementById('confirmPasswordError')` | Span | Display error | Shows if confirmation does not match password |
+
+
